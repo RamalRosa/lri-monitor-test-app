@@ -34,7 +34,7 @@ public class ToDoController {
                 .collectList()
                 .block();
 
-        log.info("Request Endpoint %s | Response: %s", url, todoList.toString());
+        log.info("Request Endpoint "+ url +" | Response: "+todoList.toString());
 
         return ResponseEntity.ok(todoList);
     }
@@ -50,7 +50,7 @@ public class ToDoController {
                 .bodyToMono(ToDoResponse.class)
                 .block();
 
-        log.info("Request Endpoint %s | Response: %s", url, todo.toString());
+        log.info("Request Endpoint "+ url +" | Response: "+todo.toString());
 
         return ResponseEntity.ok(todo);
     }

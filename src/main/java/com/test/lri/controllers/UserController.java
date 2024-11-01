@@ -34,7 +34,7 @@ public class UserController {
                 .collectList()
                 .block();
 
-        log.info("Request Endpoint %s | Response: %s", url, usersList.toString());
+        log.info("Request Endpoint "+ url +" | Response: "+usersList.toString());
 
         return ResponseEntity.ok(usersList);
     }
@@ -50,7 +50,7 @@ public class UserController {
                 .bodyToMono(UsersListResponse.class)
                 .block();
 
-        log.info("Request Endpoint %s | Response: %s", url, user.toString());
+        log.info("Request Endpoint "+ url +" | Response: "+user.toString());
 
         return ResponseEntity.ok(user);
     }
