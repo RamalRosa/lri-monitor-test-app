@@ -3,6 +3,7 @@ package com.test.lri.controllers;
 import com.test.lri.dto.responses.todo.ToDoResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("api/todo")
 @RequiredArgsConstructor
 @Data
+@Slf4j
 public class ToDoController {
 
     private final WebClient.Builder webClientBuilder;
@@ -32,6 +34,8 @@ public class ToDoController {
                 .collectList()
                 .block();
 
+        log.info("Request Endpoint %s | Response: %s", url, todoList.toString());
+
         return ResponseEntity.ok(todoList);
     }
 
@@ -45,6 +49,8 @@ public class ToDoController {
                 .retrieve()
                 .bodyToMono(ToDoResponse.class)
                 .block();
+
+        log.info("Request Endpoint %s | Response: %s", url, todo.toString());
 
         return ResponseEntity.ok(todo);
     }

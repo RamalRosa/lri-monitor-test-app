@@ -3,6 +3,7 @@ package com.test.lri.controllers;
 import com.test.lri.dto.responses.users.UsersListResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 @Data
+@Slf4j
 public class UserController {
 
     private final WebClient.Builder webClientBuilder;
@@ -32,6 +34,8 @@ public class UserController {
                 .collectList()
                 .block();
 
+        log.info("Request Endpoint %s | Response: %s", url, usersList.toString());
+
         return ResponseEntity.ok(usersList);
     }
 
@@ -45,6 +49,8 @@ public class UserController {
                 .retrieve()
                 .bodyToMono(UsersListResponse.class)
                 .block();
+
+        log.info("Request Endpoint %s | Response: %s", url, user.toString());
 
         return ResponseEntity.ok(user);
     }
